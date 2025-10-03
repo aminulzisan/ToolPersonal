@@ -227,9 +227,10 @@ bot.onText(/^\/veo(?: (.+))?$/, async (msg, match) => {
             const videoPath = path.join(TEMP_DIR, `veo_result_${Date.now()}.mp4`);
             try {
                 await downloadFile(videoUrl, videoPath);
-                // Send as a document to preserve quality and avoid deprecation warning
+                // Send as a document to preserve quality and force file attachment display
                 await bot.sendDocument(chatId, videoPath, {
-                    caption: getLang("videoCaption")
+                    caption: getLang("videoCaption"),
+                    disable_content_type_detection: true
                 });
             } catch (err) {
                 console.error("Download/Send Video Error:", err);
@@ -254,4 +255,3 @@ process.on('SIGTERM', () => {
     console.log("Shutting down bot...");
     process.exit();
 });
-
