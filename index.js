@@ -13,7 +13,7 @@ const IMGBB_API_KEY = "1b4d99fa0c3195efe42ceb62670f2a25"; // Your imgbb.com API 
 // --- API and Model Constants ---
 const VEO_API_URL = "https://api.paxsenix.org/ai-video/veo-3";
 const VALID_RATIOS = ["16:9", "9:16"];
-const VALID_MODELS = ["veo-3", "veo-3-fast"];
+const VALID_MODELS = ["veo-3"];
 
 // --- Bot Initialization ---
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
