@@ -226,7 +226,8 @@ bot.onText(/^\/veo(?: (.+))?$/, async (msg, match) => {
             const videoPath = path.join(TEMP_DIR, `veo_result_${Date.now()}.mp4`);
             try {
                 await downloadFile(videoUrl, videoPath);
-                await bot.sendVideo(chatId, videoPath, {}, { contentType: 'video/mp4' });
+                // Send as a document to preserve quality and avoid deprecation warning
+                await bot.sendDocument(chatId, videoPath);
             } catch (err) {
                 console.error("Download/Send Video Error:", err);
                 await bot.sendMessage(chatId, getLang("downloadFailed"));
