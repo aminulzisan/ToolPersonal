@@ -42,7 +42,8 @@ const langs = {
         noResults: "❌ No results were returned within the time limit.",
         noVideo: "❌ No video file was found in the API response.",
         downloadFailed: "❌ Failed to download or send the generated video.",
-        error: "❌ An unexpected error occurred. Please try again later."
+        error: "❌ An unexpected error occurred. Please try again later.",
+        videoCaption: "✅ Video sent as a document for maximum quality."
     }
 };
 
@@ -227,7 +228,9 @@ bot.onText(/^\/veo(?: (.+))?$/, async (msg, match) => {
             try {
                 await downloadFile(videoUrl, videoPath);
                 // Send as a document to preserve quality and avoid deprecation warning
-                await bot.sendDocument(chatId, videoPath);
+                await bot.sendDocument(chatId, videoPath, {
+                    caption: getLang("videoCaption")
+                });
             } catch (err) {
                 console.error("Download/Send Video Error:", err);
                 await bot.sendMessage(chatId, getLang("downloadFailed"));
